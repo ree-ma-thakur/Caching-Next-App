@@ -18,6 +18,8 @@
 - This avoids unnecessary requests to data source & speeds up the application
 - The cache persists until it's revalidated(manually or after set time)
 - Eg : After removing headers of page & layout if we naviagte to another page & come back to message page then no new request is sent to backend this is because of data cache, as it stored the response from fetch function & keep using it always, to get new request everytime we can use revalidatePath after we change some data or we can configure the fetch function using cache setting or next setting (in page.js). This is possible on fetch only as nextjs extends the fetch function
+- We can also setup confg using export revalidate const function for a file (page.js) or by using export const dynamic
+- We can also use unstable-noStore from next/cache; it disables cache in whole component
 
 # Full Route Cache
 
