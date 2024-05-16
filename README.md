@@ -17,7 +17,7 @@
 - Idea behind this is not to avoid duplicate request but instead to avoid requests altogether unless the data has changed
 - This avoids unnecessary requests to data source & speeds up the application
 - The cache persists until it's revalidated(manually or after set time)
-- Eg : After removing headers of page & layout if we naviagte to another page & come back to message page then no new request is sent to backend this is because of data cache, as it stored the response from fetch function & keep using it always, to get new request everytime we can use revalidatePath after we change some data or we can configure the fetch function using cache setting
+- Eg : After removing headers of page & layout if we naviagte to another page & come back to message page then no new request is sent to backend this is because of data cache, as it stored the response from fetch function & keep using it always, to get new request everytime we can use revalidatePath after we change some data or we can configure the fetch function using cache setting or next setting (in page.js). This is possible on fetch only as nextjs extends the fetch function
 
 # Full Route Cache
 
