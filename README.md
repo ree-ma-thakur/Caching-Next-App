@@ -7,6 +7,7 @@
 - Nextjs stores data requests wuth the same confg
 - This avoids unncessary duplicate data fetches
 - It only happens during 1 request that's being handled on Nextjs server i.e Cache only persists during request duration
+- Eg : In page.js & layout.js we have same API but different request headers therefore 2 requests were getting sent, but when we removed the header of both pages then only one request was getting sent as it was having same api & same data therefore because of RM only one request was sent to backend
 
 # Data Cache
 
@@ -16,6 +17,7 @@
 - Idea behind this is not to avoid duplicate request but instead to avoid requests altogether unless the data has changed
 - This avoids unnecessary requests to data source & speeds up the application
 - The cache persists until it's revalidated(manually or after set time)
+- Eg : After removing headers of page & layout if we naviagte to another page & come back to message page then no new request is sent to backend this is because of data cache, as it stored the response from fetch function & keep using it always, to get new request everytime we can use revalidatePath after we change some data or we can configure the fetch function using cache setting
 
 # Full Route Cache
 
