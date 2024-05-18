@@ -8,7 +8,7 @@ export default function NewMessagePage() {
     "use server";
 
     const message = formData.get("message");
-    // addMessage(message);
+    addMessage(message);
     // revalidatePath("/messages", "layout"); // layout is for nexted pages of route also
     // revalidatePath("/something", "layout"); // we can do multiple rP also
     // revalidatePath("/", "layout"); // clear cache of all pages

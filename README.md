@@ -28,6 +28,7 @@
 - The cache persists until it's revalidated
 - Full route cache is already created & initialized at build time at all pre-rendered pages, those all pages are cached
 - If we use dynamic const to change caching then we automatically diable this full route cache
+- It is very aggressive in production side
 
 # Routes Cache
 
@@ -51,3 +52,19 @@
 - Those tags BTS will be connected to cached data & then if we call rT with certain tag, nextjs will throw away any cached data that has that tag
 - This will allow us to clear the cache if those different pages would assign the same tags to their requests
 - Instead of calling multiple rP multiple time we can just use one tag on different pages & then just revalidate that tag to clear all cached data of those pages
+
+# cache
+
+- It is imported from react which is wrapped around one of our function for which request deduplication should then occur
+- At protects from requets deduplication, request is sent only once to server apart from the fact that reqeuest is requested multiple times
+
+# unstable_cache (in future cache) by next/cache
+
+- It returns a promise
+- It is used to cache the response from the data source
+- It has 2nd argument: array of cache keys which is used internally to identify cache data
+- It does caching aggressively therefore we don't get new data when we update the DB, therefore we have to tell nextjs that the data that is cached did changed
+- We can tell this by using rP or we can use rT & add tag to cached data by passing 3rd argument ti this unstabel_cache
+- 3rd agrument is confg object which allows us to setup 2 different setting
+  - revalidate : with this we can set up time period in secs after which cache will always be revalidated
+  - tags: with this we give array of tags, & when we call rT with these tags, then that cached data will be thrown away & new data is again loaded
