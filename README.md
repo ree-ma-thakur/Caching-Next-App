@@ -26,9 +26,28 @@
 - Nextjs stores the entire rendered HTML & RSC at build time
 - This avoids unnecessary HTML render cycles & data fetches
 - The cache persists until it's revalidated
+- Full route cache is already created & initialized at build time at all pre-rendered pages, those all pages are cached
+- If we use dynamic const to change caching then we automatically diable this full route cache
 
 # Routes Cache
 
 - All other 3 caches are managed on server side, RC is managed on client side
 - Nextjs stores the RSC payload in memory in the browser
 - This ensures extremely fast page transition since no server request is needed
+
+# revalidatePath (rP)
+
+- Used to throw away cache data
+- dynamic, revalidate, noStore or using confg on fetch fun all these settings either diables caching or set a certain caching time period.
+- rP instead revalidate some piece of cache on demand when we tell nextjs to do it, which is more efficient than disabling cache forever or setting a timeframe for caching.
+- Path that we define inside rP, all the data related to that path & route cache related to that path will be deleted
+- But the nested paths will not have their data & route cache deleted & revalidated unless we specify the 2nd argument as 'layout', default is 'page'
+
+# revalidatetag (rT)
+
+- It takes a tag as argument
+- We assign the tags to requests that fetch data that will be cache
+- We can assign multiple tags also to request
+- Those tags BTS will be connected to cached data & then if we call rT with certain tag, nextjs will throw away any cached data that has that tag
+- This will allow us to clear the cache if those different pages would assign the same tags to their requests
+- Instead of calling multiple rP multiple time we can just use one tag on different pages & then just revalidate that tag to clear all cached data of those pages

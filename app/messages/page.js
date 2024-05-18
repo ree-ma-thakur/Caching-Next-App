@@ -1,5 +1,5 @@
 import Messages from "@/components/messages";
-import { unstable_noStore } from "next/cache"; // In future it can be noStore only; it is same as dynamic=force-dynamic
+// import { unstable_noStore } from "next/cache"; // In future it can be noStore only; it is same as dynamic=force-dynamic
 
 // export const revalidate = 5; // This will be same as next revalidate 5 in fetch function
 // export const dynamic = "force-dynamic"; // same as cache no-store
@@ -7,9 +7,12 @@ import { unstable_noStore } from "next/cache"; // In future it can be noStore on
 // export const dynamic = "auto"; // default one
 
 export default async function MessagesPage() {
-  unstable_noStore();
+  // unstable_noStore();
   const response = await fetch(
-    "http://localhost:8080/messages"
+    "http://localhost:8080/messages",
+    {
+      next: { tags: ["msg"] },
+    }
     // {
     //   // cache: "force-cache", // default, that is always cache
     //   cache: "no-store", //  now data will not be cached
